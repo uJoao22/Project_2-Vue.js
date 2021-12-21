@@ -31,7 +31,7 @@ export default {
 
   computed: {
     usuarioLogado() {
-      return Boolean(localStorage.getItem("token")); //Se existir o token na localStorage, retorne true
+      return Boolean(this.$store.state.token); //Se existir o token no Vuex, retorne true
     }
   }
 };

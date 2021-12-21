@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import http from '@/http'
 
 Vue.use(Vuex) //Registrando o Vuex no Vue
 
@@ -14,11 +15,36 @@ const mutations = {
     DEFINIR_USUARIO_LOGADO(state, { token, usuario }){
         state.token = token
         state.usuario = usuario
+    },
+
+    DESLOGAR_USUARIO(state){
+        state.token = null,
+        state.usuario = {}
+    }
+}
+
+const actions = {
+    efetuarLogin({ commit }, usuario){ //Pegando como primeiro parametro a ação commit e destruindo ela e como segundo parametro os dados do usuario
+        return new Promise((resolve, reject) => {//Retornando uma promesa de que o usuário será logado
+            http.post('auth/login', usuario) //Efetuando o metodo de post na API com os dados do user
+                .then(res => { //Se a promesa der success, faça
+                    commit('DEFINIR_USUARIO_LOGADO', { //Efetuando o commit, usando a mutation para alterar os dados, inserindo o token de login do usuario
+                        token: res.data.access_token,
+                        usuario: res.data.user
+                    })
+                    resolve(res.data) //Se a promesa for cumprida, retorne os dados do usuario logado
+                })
+                .catch(err => { //Se der erro, faça
+                    console.log(err)
+                    reject(err) //Se a promesa não for cumprida, retorne o erro
+                })
+        })
     }
 }
 
 export default new Vuex.Store({ //Exportando uma instancia de Vuex.Store com o state definido com os valores de estado
     state: estado,
     //Quando o nome do valor é o mesmo que o da chave, ele poder omitir o valor e compactar
-    mutations
+    mutations,
+    actions
 })

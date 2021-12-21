@@ -29,25 +29,9 @@ export default {
 
     methods: {
         efetuarLogin(){
-            this.$http.post('auth/login', this.usuario)
-                .then(res => {
-                    console.log(res)
-                    //Salvando os acesso do token no localStorage
-                    //localStorage.setItem('token', res.data.access_token)
-
-                    //O objeto state da $store na chave token recebe o token do usuario logado
-                    // this.$store.state.token = res.data.data.access_token
-                    //O objeto state da $store na chave usuario recebe os dados do usuario logado
-                    // this.$store.state.usuario = res.data.data.user
-
-                    this.$store.commit('DEFINIR_USUARIO_LOGADO', {
-                        token: res.data.access_token,
-                        usuario: res.data.user
-                    })
-
-                    this.$router.push({ name: 'gerentes' }) //Redirecionando para a rota de gerentes
-                })
-                .catch(err => console.log(err))
+            //Disparando a ação efetuarLogin com o .dispatch e enviando os dados do usuario como parametro, se a ação for bem sucedida o usuario será redirecionado para a rota gerentes
+            this.$store.dispatch('efetuarLogin', this.usuario)
+                .then(() => this.$router.push({ name: 'gerentes' }))
         }
     }
 }
