@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     data(){
         return {
@@ -31,12 +29,12 @@ export default {
 
     methods: {
         efetuarLogin(){
-            axios.post('http://localhost:8082/auth/login', this.usuario)
+            this.$http.post('auth/login', this.usuario)
                 .then(res => {
                     console.log(res)
                     //Salvando os acesso do token no localStorage, para não finalizar a sessão mesmo se regarregar a página
                     localStorage.setItem('token', res.data.access_token)
-                    this.$router.push({ name: 'gerentes' })
+                    this.$router.push({ name: 'gerentes' }) //Redirecionando para a rota de gerentes
                 })
                 .catch(err => console.log(err))
         }

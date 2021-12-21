@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios' //Importando o modulo axios
-
 export default {
     data(){
         return {
@@ -36,7 +34,7 @@ export default {
     methods: {
         enviarFormulario(){
             //Usando o axios para inserir dados na API com POST, 1 parametro é a para onde enviar os dados e o 2 são os dados
-            axios.post('http://localhost:8082/auth/register', this.usuario)
+            this.$http.post('auth/register', this.usuario)
                 .then(res => {
                     console.log(res)
                     this.$router.push({ name: 'login' })

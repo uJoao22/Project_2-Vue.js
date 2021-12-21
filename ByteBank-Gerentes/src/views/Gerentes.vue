@@ -14,23 +14,18 @@ export default {
   components: {
     Gerente
   },
+
   data() {
     return {
-      gerentes: [
-        {
-          nome: 'Paulo',
-          agencia: 1000
-        },
-        {
-          nome: 'Guilherme',
-          agencia: 2000
-        },
-        {
-          nome: 'Ricardo',
-          agencia: 3000
-        }
-      ]
+      gerentes: []
     }
+  },
+
+  mounted(){ //Quando este componente for montado, carregado, execute
+    this.$http.get('gerentes') //Fazendo uma requisição para a API, com os dados dos gerentes
+      .then(res => this.gerentes = res.data) //Se der sucesso, o array gerentes, recebe os dados
+      .catch(err => console.log(err)) //Se der erro, irá ser impresso o erro no console
+
   }
 }
 </script>

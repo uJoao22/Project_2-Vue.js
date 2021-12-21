@@ -7,30 +7,26 @@ import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
-export const routes = [
+const routes = [
   {
     path: '',
     name: 'home',
-    component: Home,
-    titulo: 'Home'
+    component: Home
   },
   {
     path: '/gerentes',
     name: 'gerentes',
-    component: Gerentes,
-    titulo: 'Gerentes'
+    component: Gerentes
   },
   {
     path: '/cadastre-se',
     name: 'novo.usuario',
-    component: NovoUsuario,
-    titulo: 'Cadastre-se'
+    component: NovoUsuario
   },
   {
     path: '/login',
     name: 'login',
-    component: Login,
-    titulo: 'Login'
+    component: Login
   }
 ]
 
