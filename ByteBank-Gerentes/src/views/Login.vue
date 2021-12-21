@@ -1,0 +1,49 @@
+<template>
+  <div class="container">
+      <h1>Login</h1>
+      <form @submit.prevent="efetuarLogin">
+          <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" class="form-control" id="email" v-model="usuario.email"/>
+          </div>
+          <div class="form-group">
+              <label for="senha">Senha</label>
+              <input type="password" class="form-control" id="senha" v-model="usuario.senha"/>
+          </div>
+          <button type="submit" class="btn btn-primary brn-block">Logar</button>
+
+          <router-link :to="{ name: 'novo.usuario' }">
+              Cadastre-se
+          </router-link>
+      </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+    data(){
+        return {
+            usuario: {}
+        }
+    },
+
+    methods: {
+        efetuarLogin(){
+            axios.post('http://localhost:8082/auth/login', this.usuario)
+                .then(res => {
+                    console.log(res)
+                    //Salvando os acesso do token no localStorage, para não finalizar a sessão mesmo se regarregar a página
+                    localStorage.setItem('token', res.data.access_token)
+                    this.$router.push({ name: 'gerentes' })
+                })
+                .catch(err => console.log(err))
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

@@ -3,24 +3,34 @@ import VueRouter from 'vue-router'
 import Gerentes from '../views/Gerentes.vue'
 import Home from '../views/Home.vue'
 import NovoUsuario from '../views/NovoUsuario.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
     path: '',
     name: 'home',
-    component: Home
+    component: Home,
+    titulo: 'Home'
   },
   {
     path: '/gerentes',
     name: 'gerentes',
-    component: Gerentes
+    component: Gerentes,
+    titulo: 'Gerentes'
   },
   {
     path: '/cadastre-se',
     name: 'novo.usuario',
-    component: NovoUsuario
+    component: NovoUsuario,
+    titulo: 'Cadastre-se'
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    titulo: 'Login'
   }
 ]
 

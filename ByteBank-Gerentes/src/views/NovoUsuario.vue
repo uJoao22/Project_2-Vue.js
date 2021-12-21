@@ -4,15 +4,15 @@
         <form @submit.prevent="enviarFormulario">
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" name="name" v-model="usuario.nome"/>
+                <input type="text" class="form-control" id="name" v-model="usuario.nome"/>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" class="form-control" name="email" v-model="usuario.email"/>
+                <input type="email" class="form-control" id="email" v-model="usuario.email"/>
             </div>
             <div class="form-group">
                 <label for="senha">Senha</label>
-                <input type="password" class="form-control" name="senha" v-model="usuario.senha"/>
+                <input type="password" class="form-control" id="senha" v-model="usuario.senha"/>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
@@ -37,7 +37,10 @@ export default {
         enviarFormulario(){
             //Usando o axios para inserir dados na API com POST, 1 parametro é a para onde enviar os dados e o 2 são os dados
             axios.post('http://localhost:8082/auth/register', this.usuario)
-                .then(res => console.log(res))
+                .then(res => {
+                    console.log(res)
+                    this.$router.push({ name: 'login' })
+                })
                 .catch(err => console.log(err))
         }
     }
