@@ -5,7 +5,7 @@ import http from '@/http'
 Vue.use(Vuex) //Registrando o Vuex no Vue
 
 const estado = { //Criando o objeto estado
-    token: null, //Com a chave token definida como null
+    token: localStorage.getItem('token') || '', //Com a chave token definida como null
     usuario: {} //E uma chave usuario com um objeto vazio
 }
 
@@ -32,6 +32,7 @@ const actions = {
                         token: res.data.access_token,
                         usuario: res.data.user
                     })
+                    localStorage.setItem('token', res.data.access_token)
                     resolve(res.data) //Se a promesa for cumprida, retorne os dados do usuario logado
                 })
                 .catch(err => { //Se der erro, faça
