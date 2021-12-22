@@ -5,7 +5,7 @@ import http from '@/http'
 Vue.use(Vuex) //Registrando o Vuex no Vue
 
 const estado = { //Criando o objeto estado
-    token: localStorage.getItem('token') || '', //Com a chave token definida como null
+    token: localStorage.getItem('token') || null, //Com a chave token definida como null
     usuario: {} //E uma chave usuario com um objeto vazio
 }
 
