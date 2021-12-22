@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '@/store'
+import store from '../store'
 
 const http = axios.create({ //Criando uma instania de axios e configurando-a
     baseURL: 'http://localhost:8082/',

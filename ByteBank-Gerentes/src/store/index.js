@@ -43,9 +43,14 @@ const actions = {
     }
 }
 
+const getters = {
+    usuarioEstaLogado: state => Boolean(state.token) //A propriedade recebe state como parametro e retorna um Booleano se existir um token ou não
+}
+
 export default new Vuex.Store({ //Exportando uma instancia de Vuex.Store com o state definido com os valores de estado
     state: estado,
     //Quando o nome do valor é o mesmo que o da chave, ele poder omitir o valor e compactar
     mutations,
-    actions
+    actions,
+    getters
 })

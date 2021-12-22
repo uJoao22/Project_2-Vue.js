@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Gerentes from '../views/Gerentes.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import store from '@/store'
+import store from '../store'
 
 Vue.use(VueRouter)
 

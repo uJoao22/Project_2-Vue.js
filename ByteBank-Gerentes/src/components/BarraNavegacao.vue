@@ -13,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <navbar-login v-if="usuarioLogado"/>
+        <navbar-login v-if="usuarioEstaLogado"/>
         <navbar-logout v-else/>
     </div>
   </nav>
@@ -22,6 +22,7 @@
 <script>
 import NavbarLogin from "./NavbarLogin";
 import NavbarLogout from "./NavbarLogout";
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -30,9 +31,7 @@ export default {
   },
 
   computed: {
-    usuarioLogado() {
-      return Boolean(this.$store.state.token); //Se existir o token no Vuex, retorne true
-    }
+    ...mapGetters(['usuarioEstaLogado'])
   }
 };
 </script>
