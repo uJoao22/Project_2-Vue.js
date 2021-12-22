@@ -13,13 +13,8 @@
 </template>
 
 <script>
+import { logoutMixin } from '@/mixins'
 export default {
-  methods: {
-    efetuarLogout() {
-      this.$store.commit('DESLOGAR_USUARIO')
-      localStorage.removeItem("token");
-      this.$router.push({ name: "login" });
-    }
-  }
+  mixins: [logoutMixin] //Atribuindo o mixin a uma propriedade
 }
 </script>
