@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Gerentes from '../views/Gerentes.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import provedor from '@/provedor'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -41,7 +41,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((routeTo, routeFrom, next) => { //Antes de acessar cada rota este método será invocado, tendo como parametro, a rota de origem, a rota de destino e o que fazer em seguida
-  if(!routeTo.meta.publica && !provedor.state.token && !localStorage.getItem('token')){ //Caso a minha meta de destino não seja publica e meu token não estiver configurado no provedor e no localStorage, faça
+  if(!routeTo.meta.publica && !store.state.token && !localStorage.getItem('token')){ //Caso a minha meta de destino não seja publica e meu token não estiver configurado no store e no localStorage, faça
       return next({ path: '/login' }) //Retorne para a função a rota de login como destino
   }
   next() //Caso seja privada e o token exista, faça

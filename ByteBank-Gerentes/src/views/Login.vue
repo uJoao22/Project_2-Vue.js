@@ -10,6 +10,7 @@
               <label for="senha">Senha</label>
               <input type="password" class="form-control" id="senha" v-model="usuario.senha"/>
           </div>
+          <p class="alert alert-danger" v-if="mensagemErro">{{ mensagemErro }}</p>
           <button type="submit" class="btn btn-primary brn-block">Logar</button>
 
           <router-link :to="{ name: 'novo.usuario' }">
@@ -23,7 +24,8 @@
 export default {
     data(){
         return {
-            usuario: {}
+            usuario: {},
+            mensagemErro: ''
         }
     },
 
@@ -31,7 +33,15 @@ export default {
         efetuarLogin(){
             //Disparando a ação efetuarLogin com o .dispatch e enviando os dados do usuario como parametro, se a ação for bem sucedida o usuario será redirecionado para a rota gerentes
             this.$store.dispatch('efetuarLogin', this.usuario)
-                .then(() => this.$router.push({ name: 'gerentes' }))
+                .then(() => {
+                    this.$router.push({ name: 'gerentes' })
+                    this.mensagemErro = ''
+                })
+                .catch(erro => { //Se der erro no login, faça
+                    if(erro.request.status === 401){ //Se o status da requisição for igual a 401, faça
+                        this.mensagemErro = 'Login ou senha inválido(s)'
+                    }
+                })
         }
     }
 }
